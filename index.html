@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ನೈಜ ಸಂಖ್ಯೆಗಳು: ಇಂಟರಾಕ್ಟಿವ್ ಪೋಸ್ಟರ್</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--kn:'Noto Sans Kannada','Nudi 01 e','Nudi Akshara','Tunga','Kedage',system-ui,sans-serif;--paper:#f4f6f1;--grid:#dfe5db;--ink:#14213d;--soft:#4a5673;--gold:#f2a900;--teal:#12877a;--coral:#e4572e;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--paper:#0f1a2e;--grid:#1a2742;--ink:#f1f4ee;--soft:#a9b4cc;--card:#17243d}}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:var(--kn);color:var(--ink);background:var(--paper);
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;overflow-x:hidden}
+nav{display:flex;gap:8px;align-items:center;padding:12px 20px;flex-wrap:wrap}
+nav button,.ctl button{font:inherit;font-weight:800;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:10px;cursor:pointer}
+nav button.on{background:var(--ink);color:var(--paper)}
+nav .sp{flex:1}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.poster{display:none;min-height:calc(100vh - 70px);padding:10px 28px 40px;grid-template-columns:minmax(260px,5fr) 7fr;gap:36px;align-items:start}
+.poster.on{display:grid}
+h1{font-family:var(--kn);font-weight:800;font-size:clamp(2.2rem,5vw,4.2rem);line-height:1.02;margin-bottom:10px}
+.tag{font-family:var(--kn);font-size:clamp(1.1rem,2vw,1.5rem);color:var(--teal);margin-bottom:22px}
+.facts{list-style:none;padding:0;display:grid;gap:10px}
+.facts li{background:var(--card);border-left:6px solid var(--gold);padding:10px 14px;border-radius:4px 12px 12px 4px;font-size:1.02rem;line-height:1.4}
+.ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.ctl label{font-weight:800;display:flex;gap:6px;align-items:center}
+.ctl input{width:92px;font:inherit;font-weight:800;padding:7px 9px;border:2px solid var(--ink);border-radius:10px;background:var(--card);color:var(--ink)}
+.ctl .go{background:var(--gold);color:#14213d;border-color:#14213d}
+.stage{display:grid;gap:12px}
+.stage>div{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:14px 18px;font-size:clamp(1.05rem,2vw,1.45rem);line-height:1.5;opacity:0;transform:translateY(14px) scale(.98);transition:opacity .5s,transform .5s;pointer-events:none}
+.stage>div.on{opacity:1;transform:none;pointer-events:auto}
+.stage>div.result{background:var(--ink);color:var(--paper);font-family:var(--kn);font-weight:800;font-size:clamp(1.3rem,3vw,2rem)}
+.stage>div.result b{color:var(--gold)}
+.stage>div.bad{background:var(--coral);color:#fff}
+b.hl{color:var(--coral)}b.zero{color:var(--teal);background:rgba(18,135,122,.15);padding:0 6px;border-radius:6px}
+.bar{display:flex;gap:3px;margin-top:8px;height:16px}
+.bar i{background:var(--teal);border-radius:4px;transform-origin:left;transform:scaleX(0);transition:transform .6s}
+.on .bar i{transform:scaleX(1)}
+.bar i.rem{background:repeating-linear-gradient(45deg,var(--coral),var(--coral) 4px,transparent 4px,transparent 8px)}
+.chip{display:inline-block;background:var(--gold);color:#14213d;font-weight:800;border-radius:8px;padding:0 8px;margin:0 2px}
+.dig{font-family:var(--kn);font-size:1.5em;word-break:break-all;letter-spacing:2px}
+.dig span{display:inline-block;opacity:0}
+.on .dig span{animation:pop .35s forwards}
+.dig .rp{color:var(--coral);text-decoration:overline}
+@keyframes pop{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+small.hint{display:block;color:var(--soft);padding:0 28px 20px}
+body.clean nav,body.clean .ctl,body.clean small.hint{display:none}
+body.clean .poster{min-height:100vh;padding-top:30px}
+@media(max-width:820px){.poster.on{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation-duration:.01s!important}}
+body{padding-bottom:60px}
+.brand{position:fixed;left:0;right:0;bottom:0;z-index:9;text-align:center;padding:12px;background:var(--ink);color:var(--paper);font-family:var(--kn);font-weight:800;font-size:clamp(1rem,2.4vw,1.4rem);border-top:4px solid var(--gold)}
+.stage>div.key{background:var(--gold);color:#14213d;font-weight:800;border-color:#14213d}
+body{line-height:1.7}h1{line-height:1.3}.tag{line-height:1.5}.stage>div{line-height:1.75}.facts li{line-height:1.7}
+</style>
+</head>
+<body>
+<nav id="nav"></nav>
+<main id="main"></main>
+<div class="brand">MG Sahoo Education Blog</div>
+<small class="hint">ಕೀಗಳು: ← → ಪೋಸ್ಟರ್ ಬದಲಿಸಿ · Space ಮರುಪ್ಲೇ · S ಒಂದು ಹಂತ · H ಬಟನ್ ಮರೆಮಾಡಿ (ರೆಕಾರ್ಡಿಂಗ್‌ಗೆ)</small>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+function factor(n){const m={};for(let p=2;p*p<=n;p++)while(n%p==0){m[p]=(m[p]||0)+1;n/=p}if(n>1)m[n]=(m[n]||0)+1;return m}
+function fmt(m){const k=Object.keys(m).map(Number).sort((a,b)=>a-b);return k.length?k.map(p=>p+(m[p]>1?'<sup>'+m[p]+'</sup>':'')).join(' × '):'1'}
+const val=m=>Object.keys(m).reduce((t,p)=>t*Math.pow(+p,m[p]),1);
+const isPrime=n=>n>1&&Object.keys(factor(n)).length==1&&factor(n)[n]==1;
+
+const POSTERS=[
+{name:'1 · ಭಾಗಾಕಾರ ಪ್ರಮೇಯ',title:'ಯೂಕ್ಲಿಡ್‌ನ ಭಾಗಾಕಾರ ಪ್ರಮೇಯ',tag:'ಶೇಷ ಸೊನ್ನೆಯಾಗುವವರೆಗೆ ಭಾಗಿಸಿ.',
+key:'a = bq + r, 0 ≤ r &lt; b. ಕೊನೆಯ ಶೂನ್ಯೇತರ ಭಾಜಕವೇ ಮ.ಸಾ.ಅ (HCF).',
+facts:['ಧನ ಪೂರ್ಣಾಂಕಗಳಾದ a ಮತ್ತು b ಗೆ: <b>a = bq + r, 0 ≤ r &lt; b</b>','ಯೂಕ್ಲಿಡ್ ಅಲ್ಗಾರಿದಮ್: ಶೇಷ 0 ಆಗುವವರೆಗೆ ಭಾಗಿಸುತ್ತಾ ಹೋಗಿ. ಕೊನೆಯ ಭಾಜಕವೇ <b>ಮ.ಸಾ.ಅ (HCF)</b>.','ಪ್ರತಿ ಪೂರ್ಣಾಂಕ 2q ಅಥವಾ 2q+1; ವರ್ಗಗಳು 3m ಅಥವಾ 3m+1; ಘನಗಳು 9m, 9m+1 ಅಥವಾ 9m+8.','ಪ್ರತಿ ಹಂತವನ್ನೂ ಬರೆಯಿರಿ, ಏಕೆಂದರೆ ಪ್ರತಿ ಹಂತಕ್ಕೂ ಅಂಕಗಳಿವೆ.'],
+inputs:[['a',404],['b',96]],
+build([a,b]){let B=Math.max(a,b),S=Math.min(a,b);if(S<1)return['<div class="bad">ಧನ ಸಂಖ್ಯೆಗಳನ್ನು ನಮೂದಿಸಿ.</div>'];const o=[];
+while(S){const q=Math.floor(B/S),r=B%S;let bar='';if(q<=16){for(let i=0;i<q;i++)bar+=`<i style="flex:${S}"></i>`;if(r)bar+=`<i class="rem" style="flex:${r}"></i>`}
+o.push(`${B} = ${S} × ${q} + <b class="${r?'hl':'zero'}">${r}</b><div class="bar">${bar}</div>`);B=S;S=r}
+o.push(`§ಮ.ಸಾ.ಅ (HCF)(${a}, ${b}) = <b>${B}</b>`);return o}},
+{name:'2 · ಮೂಲಭೂತ ಪ್ರಮೇಯ',title:'ಅಂಕಗಣಿತದ ಮೂಲಭೂತ ಪ್ರಮೇಯ',tag:'ಪ್ರತಿ ಭಾಜ್ಯ ಸಂಖ್ಯೆಗೆ ಒಂದೇ ಒಂದು ಅವಿಭಾಜ್ಯ ಗುರುತು.',
+key:'HCF × LCM = a × b (ಎರಡು ಸಂಖ್ಯೆಗಳಿಗೆ ಮಾತ್ರ).',
+facts:['ಪ್ರತಿ ಭಾಜ್ಯ ಸಂಖ್ಯೆಯನ್ನು ಅವಿಭಾಜ್ಯ ಸಂಖ್ಯೆಗಳ ಗುಣಲಬ್ಧವಾಗಿ ಬರೆಯಬಹುದು ಮತ್ತು ಈ ವಿಭಜನೆ <b>ಅನನ್ಯ</b> (ಕ್ರಮ ಹೊರತುಪಡಿಸಿ).','<b>ಮ.ಸಾ.ಅ (HCF)</b> = ಸಾಮಾನ್ಯ ಅವಿಭಾಜ್ಯಗಳ <i>ಚಿಕ್ಕ</i> ಘಾತಗಳು.','<b>ಕ.ಸಾ.ಅ (LCM)</b> = ಎಲ್ಲಾ ಅವಿಭಾಜ್ಯಗಳ <i>ದೊಡ್ಡ</i> ಘಾತಗಳು.','<b>HCF × LCM = a × b</b> (ಎರಡು ಸಂಖ್ಯೆಗಳಿಗೆ ಮಾತ್ರ).','6ⁿ ನಲ್ಲಿ ಅಪವರ್ತನ 5 ಇಲ್ಲ, ಆದ್ದರಿಂದ ಅದು ಎಂದಿಗೂ 0 ಯಲ್ಲಿ ಕೊನೆಗೊಳ್ಳುವುದಿಲ್ಲ.'],
+inputs:[['a',12],['b',18]],
+build([a,b]){if(a<2||b<2||a>1e6||b>1e6)return['<div class="bad">ಸಂಖ್ಯೆಗಳನ್ನು 2 ರಿಂದ 1,000,000 ರೊಳಗೆ ನಮೂದಿಸಿ.</div>'];const A=factor(a),B=factor(b),H={},L={};
+for(const p in A){if(B[p])H[p]=Math.min(A[p],B[p]);L[p]=Math.max(A[p],B[p]||0)}for(const p in B)if(!L[p])L[p]=B[p];
+const h=val(H),l=val(L);
+return[`${a} = <span class="chip">${fmt(A)}</span>`,`${b} = <span class="chip">${fmt(B)}</span>`,
+`ಮ.ಸಾ.ಅ: ಸಾಮಾನ್ಯ ಅವಿಭಾಜ್ಯಗಳ ಚಿಕ್ಕ ಘಾತಗಳು<br>= <b class="zero">${fmt(H)}</b> = <b>${h}</b>`,
+`ಕ.ಸಾ.ಅ: ಎಲ್ಲಾ ಅವಿಭಾಜ್ಯಗಳ ದೊಡ್ಡ ಘಾತಗಳು<br>= <b class="zero">${fmt(L)}</b> = <b>${l}</b>`,
+`ಪರಿಶೀಲನೆ: ${h} × ${l} = ${h*l} = ${a} × ${b}`,
+`§ಮ.ಸಾ.ಅ = <b>${h}</b> · ಕ.ಸಾ.ಅ = <b>${l}</b>`]}},
+{name:'3 · ಅಪರಿಮೇಯ ಸಂಖ್ಯೆಗಳು',title:'ಅಪರಿಮೇಯ ಸಂಖ್ಯೆಗಳು',tag:'ವಿರೋಧಾಭಾಸದ ಮೂಲಕ ಸಾಧನೆ, ಹಂತ ಹಂತವಾಗಿ.',
+key:'ಅವಿಭಾಜ್ಯ ಸಂಖ್ಯೆ p, a² ಅನ್ನು ಭಾಗಿಸಿದರೆ, p, a ಅನ್ನೂ ಭಾಗಿಸುತ್ತದೆ.',
+facts:['ಅವಿಭಾಜ್ಯ ಸಂಖ್ಯೆ p, a² ಅನ್ನು ಭಾಗಿಸಿದರೆ, p, a ಅನ್ನೂ ಭಾಗಿಸುತ್ತದೆ.','√2, √3, √5 ಅಪರಿಮೇಯ ಎಂದು ಸಾಧಿಸಿ; ನಂತರ 3 + 2√5, 5 − √3, 1/√2 ಕೂಡ.','ಪರಿಮೇಯ ± ಅಪರಿಮೇಯ = ಅಪರಿಮೇಯ. ಶೂನ್ಯೇತರ ಪರಿಮೇಯ × ಅಪರಿಮೇಯ = ಅಪರಿಮೇಯ.','ವಿರೋಧಾಭಾಸದ ಹೇಳಿಕೆಯನ್ನು ಯಾವಾಗಲೂ ಬರೆಯಿರಿ.'],
+inputs:[['p',2]],
+build([p]){if(!isPrime(p))return['<div class="bad">ಅವಿಭಾಜ್ಯ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ (2, 3, 5, 7, 11…).</div>'];
+const n=34,x=BigInt(p)*10n**BigInt(2*n);let lo=0n,hi=10n**BigInt(n+2);while(lo<hi){const m=(lo+hi+1n)/2n;if(m*m<=x)lo=m;else hi=m-1n}
+const s=lo.toString();const dg=(s[0]+'.'+s.slice(1)).split('').map((c,i)=>`<span style="animation-delay:${i*70}ms">${c}</span>`).join('');
+return[`<b>ಹಂತ 1.</b> √${p} ಪರಿಮೇಯ ಎಂದು ಭಾವಿಸಿ: √${p} = a/b, ಇಲ್ಲಿ a ಮತ್ತು b ಸಹ-ಅವಿಭಾಜ್ಯ (co-prime), b ≠ 0.`,
+`<b>ಹಂತ 2.</b> ಎರಡೂ ಬದಿ ವರ್ಗ ಮಾಡಿ: a² = ${p}b².`,
+`<b>ಹಂತ 3.</b> ${p}, a² ಅನ್ನು ಭಾಗಿಸುತ್ತದೆ, ಆದ್ದರಿಂದ <b class="zero">${p}, a ಅನ್ನು ಭಾಗಿಸುತ್ತದೆ</b>. a = ${p}c ಎಂದು ಬರೆಯಿರಿ.`,
+`<b>ಹಂತ 4.</b> ಆಗ ${p*p}c² = ${p}b², ಅಂದರೆ b² = ${p}c².`,
+`<b>ಹಂತ 5.</b> ಆದ್ದರಿಂದ ${p}, b² ಅನ್ನು ಭಾಗಿಸುತ್ತದೆ, ಹಾಗಾಗಿ <b class="zero">${p}, b ಅನ್ನು ಭಾಗಿಸುತ್ತದೆ</b>.`,
+`<b>ಹಂತ 6.</b> ${p}, a ಮತ್ತು b ಎರಡನ್ನೂ ಭಾಗಿಸುತ್ತದೆ. <b class="hl">ಇದು a ಮತ್ತು b ಸಹ-ಅವಿಭಾಜ್ಯ ಎಂಬ ನಮ್ಮ ಊಹೆಗೆ ವಿರುದ್ಧ.</b>`,
+`§ಆದ್ದರಿಂದ √${p} <b>ಅಪರಿಮೇಯ</b>.`,
+`ಇದರ ಅಂಕೆಗಳು ಎಂದಿಗೂ ಮುಗಿಯುವುದಿಲ್ಲ, ಪುನರಾವರ್ತನೆಯೂ ಆಗುವುದಿಲ್ಲ:<div class="dig">${dg}…</div>`]}},
+{name:'4 · ದಶಮಾಂಶ ವಿಸ್ತರಣೆ',title:'ದಶಮಾಂಶ ವಿಸ್ತರಣೆ',tag:'ಛೇದವನ್ನು ನೋಡಿ, ದಶಮಾಂಶವನ್ನು ಊಹಿಸಿ.',
+key:'ಲಘುರೂಪದಲ್ಲಿ p/q ಅಂತ್ಯಗೊಳ್ಳುವುದು q = 2ᵐ × 5ⁿ ಆಗಿದ್ದರೆ ಮಾತ್ರ.',
+facts:['ಪರಿಮೇಯ: ಅಂತ್ಯಗೊಳ್ಳುವ, ಅಥವಾ ಅಂತ್ಯವಾಗದ ಪುನರಾವರ್ತಿತ ದಶಮಾಂಶ.','ಅಪರಿಮೇಯ: ಅಂತ್ಯವಾಗದ, ಪುನರಾವರ್ತನೆಯಾಗದ ದಶಮಾಂಶ.','ಲಘುರೂಪದಲ್ಲಿ p/q ಅಂತ್ಯಗೊಳ್ಳಲು <b>q = 2ᵐ × 5ⁿ</b> ಆಗಿರಬೇಕು.','ಯಾವಾಗಲೂ ಮೊದಲು ಭಿನ್ನರಾಶಿಯನ್ನು ಲಘುರೂಪಕ್ಕೆ ಇಳಿಸಿ.'],
+inputs:[['p',13],['q',3125]],
+build([p,q]){if(p<1||q<2||q>1e6)return['<div class="bad">p ≥ 1 ಮತ್ತು q ಅನ್ನು 2 ರಿಂದ 1,000,000 ರೊಳಗೆ ನಮೂದಿಸಿ.</div>'];
+const g=gcd(p,q),P=p/g,Q=q/g,F=factor(Q),bad=Object.keys(F).filter(k=>k!=2&&k!=5),ok=!bad.length;
+const ip=Math.floor(P/Q);let r=P%Q;const seen={},dg=[];
+while(r&&!(r in seen)&&dg.length<60){seen[r]=dg.length;r*=10;dg.push(Math.floor(r/Q));r%=Q}
+const st=r&&(r in seen)?seen[r]:-1;
+const spans=dg.map((c,i)=>`<span class="${st>=0&&i>=st?'rp':''}" style="animation-delay:${i*90}ms">${c}</span>`).join('');
+return[`ಲಘುರೂಪ: ${p}/${q}${g>1?` = <b>${P}/${Q}</b> (${g} ರಿಂದ ಭಾಗಿಸಲಾಗಿದೆ)`:' (ಈಗಾಗಲೇ ಲಘುರೂಪದಲ್ಲಿದೆ)'}`,
+`ಛೇದ: ${Q} = <span class="chip">${fmt(F)}</span>`,
+ok?`q ನಲ್ಲಿ 2 ಮತ್ತು/ಅಥವಾ 5 ಮಾತ್ರ ಇದೆ, ಆದ್ದರಿಂದ ಇದು <b class="zero">ಅಂತ್ಯಗೊಳ್ಳುತ್ತದೆ</b>.`:`ಅವಿಭಾಜ್ಯ ಅಪವರ್ತನ <b class="hl">${bad[0]}</b> 2 ಅಥವಾ 5 ಅಲ್ಲ, ಆದ್ದರಿಂದ ಇದು <b class="hl">ಪುನರಾವರ್ತನೆಯಾಗುತ್ತದೆ</b>.`,
+`${P}/${Q} = <div class="dig">${ip}.${spans}${!ok&&st<0?'…':''}</div>`,
+`§${ok?'ಅಂತ್ಯಗೊಳ್ಳುವ ದಶಮಾಂಶ':'ಅಂತ್ಯವಾಗದ ಪುನರಾವರ್ತಿತ ದಶಮಾಂಶ'}`]}},
+{name:'5 · a + b√c',title:'a + b√c ಮಾದರಿ',tag:'ಮೂಲವನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ, ವಿರೋಧಾಭಾಸ ಗುರುತಿಸಿ.',
+key:'a + b√c ಅಪರಿಮೇಯ ಎಂದು ಸಾಧಿಸಲು, ಅದು ಪರಿಮೇಯ ಎಂದು ಭಾವಿಸಿ, √c ಅನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ. √c ಪರಿಮೇಯವಾಗುತ್ತದೆ, ಇದು ವಿರೋಧಾಭಾಸ.',
+facts:['ಉದಾಹರಣೆಗಳು: 3 + 2√5, 5 − √3, 7√2, 4 − 3√7.','ಇಡೀ ಸಂಖ್ಯೆ ಪರಿಮೇಯ ಎಂದು ಭಾವಿಸಿ: a + b√c = r.','ಮೂಲವನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ: √c = (r − a)/b, ಇದು ಪರಿಮೇಯ.','ಆದರೆ √c ಅಪರಿಮೇಯ (ಮೊದಲೇ ಸಾಧಿಸಲಾಗಿದೆ), ಇದು <b>ವಿರೋಧಾಭಾಸ</b>. ಇದನ್ನು ಯಾವಾಗಲೂ ಬರೆಯಿರಿ.'],
+inputs:[['a',3],['b',2],['c',5]],
+build([a,b,c]){if(!isPrime(c)||!b||!Number.isInteger(a)||!Number.isInteger(b))return['<div class="bad">c ಅವಿಭಾಜ್ಯ ಸಂಖ್ಯೆ ಮತ್ತು b ≠ 0 ನಮೂದಿಸಿ. ಮೈನಸ್‌ಗಾಗಿ ಋಣ b ಬಳಸಿ (5 − √3 ಗೆ a=5, b=-1, c=3).</div>'];
+const ab=Math.abs(b),E=(a?a+(b<0?' − ':' + '):(b<0?'−':''))+(ab==1?'':ab)+'√'+c;
+const ra=a?`r ${a<0?'+':'−'} ${Math.abs(a)}`:'r',bt=(b==1?'':b==-1?'−':b)+'√'+c,bd=b<0?`(${b})`:b;
+return[`<b>ಹಂತ 1.</b> <span class="chip">${E}</span> ಪರಿಮೇಯ ಎಂದು ಭಾವಿಸಿ. ${E} = r, ಇಲ್ಲಿ r ಪರಿಮೇಯ.`,
+`<b>ಹಂತ 2.</b> ಮೂಲವನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ: ${bt} = ${ra}, ಆದ್ದರಿಂದ <b class="zero">√${c} = (${ra}) / ${bd}</b>.`,
+`<b>ಹಂತ 3.</b> r, a ಮತ್ತು b ಪರಿಮೇಯ ಮತ್ತು b ≠ 0, ಆದ್ದರಿಂದ (${ra}) / ${bd} ಪರಿಮೇಯ. ಹಾಗಾಗಿ √${c} ಪರಿಮೇಯ.`,
+`<b>ಹಂತ 4.</b> ಆದರೆ √${c} ಅಪರಿಮೇಯ (ಮೊದಲೇ ಸಾಧಿಸಲಾಗಿದೆ). <b class="hl">ಇದು ${E} ಪರಿಮೇಯ ಎಂಬ ನಮ್ಮ ಊಹೆಗೆ ವಿರುದ್ಧ.</b>`,
+`§ಆದ್ದರಿಂದ ${E} <b>ಅಪರಿಮೇಯ</b>.`]}}
+];
+
+let cur=0,tok=0;
+const nav=$('#nav'),main=$('#main');
+POSTERS.forEach((P,i)=>{
+ const b=document.createElement('button');b.textContent=P.name;b.onclick=()=>show(i);nav.appendChild(b);
+ const s=document.createElement('section');s.className='poster';
+ s.innerHTML=`<div><h1>${P.title}</h1><div class="tag">${P.tag}</div><ul class="facts">${P.facts.map(f=>`<li>${f}</li>`).join('')}</ul></div>
+ <div><div class="ctl">${P.inputs.map(([n,v])=>`<label>${n}<input type="number" value="${v}" data-n="${n}"></label>`).join('')}
+ <button class="go">ಪ್ರಾರಂಭಿಸಿ</button><button class="st">ಮುಂದಿನ ಹಂತ</button><button class="rs">ಮರುಹೊಂದಿಸಿ</button></div><div class="stage"></div></div>`;
+ main.appendChild(s);P.el=s;P.stage=$('.stage',s);
+ $('.go',s).onclick=()=>play();$('.st',s).onclick=()=>step();$('.rs',s).onclick=()=>{tok++;kids().forEach(k=>k.classList.remove('on'))};
+ s.querySelectorAll('input').forEach(inp=>inp.addEventListener('keydown',e=>{if(e.key==='Enter')play()}));
+ s.addEventListener('keydown',e=>e.stopPropagation());
+});
+const kids=()=>[...POSTERS[cur].stage.children];
+function build(){const P=POSTERS[cur];const v=[...P.el.querySelectorAll('input')].map(i=>+i.value);
+ P.stage.innerHTML=`<div class="key">ಮುಖ್ಯ ಅಂಶ: ${P.key}</div>`+P.build(v).map(h=>{const r=h.startsWith('§');return `<div class="${r?'result':''}${h.includes('class="bad"')?' bad':''}">${r?h.slice(1):h}</div>`}).join('')}
+async function play(){build();const my=++tok;await sleep(300);for(const k of kids()){if(my!==tok)return;k.classList.add('on');await sleep(1800)}}
+function step(){if(!kids().length||kids().every(k=>k.classList.contains('on'))&&!1)build();tok++;const n=kids().find(k=>!k.classList.contains('on'));if(n)n.classList.add('on');else{build();kids()[0].classList.add('on')}}
+function show(i){tok++;cur=i;POSTERS.forEach((P,j)=>P.el.classList.toggle('on',j==i));[...nav.children].forEach((b,j)=>b.classList.toggle('on',j==i));play()}
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowRight')show((cur+1)%5);else if(e.key==='ArrowLeft')show((cur+4)%5);
+ else if(e.key===' '){e.preventDefault();play()}else if(e.key==='s'||e.key==='S')step();
+ else if(e.key==='h'||e.key==='H')document.body.classList.toggle('clean')});
+show(Math.min(4,Math.max(0,(+location.hash.slice(1)||1)-1)));
+</script>
+</body>
+</html>
